@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 
@@ -8,9 +9,8 @@ sealed class WallController : MonoBehaviour
     [SerializeField] GameObject _prefab = null;
     [SerializeField] Vector3Int _repeats = new Vector3Int(6, 5, 20);
     [SerializeField] float _thrust = 1;
-    [SerializeField] float _spin = 0.1f;
 
-    float _offset, _roll;
+    List<Transform> _transforms = new List<Transform>();
 
     void Start()
     {
@@ -21,11 +21,14 @@ sealed class WallController : MonoBehaviour
 
     void Update()
     {
-        _offset = (_offset + _thrust * Time.deltaTime) % 2;
-        _roll += _spin * Time.deltaTime;
-
-        transform.localPosition = new Vector3(0, 0, -_offset);
-        transform.localRotation = quaternion.RotateZ(_roll);
+        var delta = -_thrust * Time.deltaTime;
+        foreach (var tr in _transforms)
+        {
+            var p = tr.localPosition;
+            p.z += delta;
+            if (p.z < 0) p.z += _repeats.z;
+            tr.localPosition = p;
+        }
     }
 
     float3 GetTubeOrigin(int column, int row)
@@ -39,13 +42,18 @@ sealed class WallController : MonoBehaviour
 
         for (var i = 0; i < _repeats.z;)
         {
-            Instantiate(_prefab, pos + math.float3(0, -0.5f, i), q_h, parent);
-            Instantiate(_prefab, pos + math.float3(0, +0.5f, i), q_h, parent);
+            var go1 = Instantiate(_prefab, pos + math.float3(0, -0.5f, i), q_h, parent);
+            var go2 = Instantiate(_prefab, pos + math.float3(0, +0.5f, i), q_h, parent);
             i++;
 
-            Instantiate(_prefab, pos + math.float3(-0.5f, 0, i), q_v, parent);
-            Instantiate(_prefab, pos + math.float3(+0.5f, 0, i), q_v, parent);
+            var go3 = Instantiate(_prefab, pos + math.float3(-0.5f, 0, i), q_v, parent);
+            var go4 = Instantiate(_prefab, pos + math.float3(+0.5f, 0, i), q_v, parent);
             i++;
+
+            _transforms.Add(go1.transform);
+            _transforms.Add(go2.transform);
+            _transforms.Add(go3.transform);
+            _transforms.Add(go4.transform);
         }
     }
 }

@@ -175,7 +175,7 @@ MonoBehaviour:
     x: 10
     y: 10
     z: 10
-  frequency: 0.1
+  frequency: 0.2
   octaves: 2
 --- !u!1 &1039522212
 GameObject:
@@ -221,12 +221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 4886587909146476131, guid: 93ef823cb425b1e47a44ead112315c91, type: 3}
-  _instanceCount: 4
+  _instanceCount: 8
   _extent:
-    x: 0.4
-    y: 0.4
+    x: 0.8
+    y: 0.8
   _depth: 40
-  _velocity: 40
+  _velocity: 80
   _repeatPoint: -10
 --- !u!1 &1615425348
 GameObject:
@@ -259,8 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2887117785970514581, guid: b549536764fa97144a6a331a7dfdad1a, type: 3}
   _repeats: {x: 7, y: 5, z: 20}
-  _thrust: 5
-  _spin: 0.15
+  _thrust: 14
 --- !u!4 &1615425350
 Transform:
   m_ObjectHideFlags: 0
