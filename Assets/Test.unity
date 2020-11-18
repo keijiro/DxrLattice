@@ -221,12 +221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 4886587909146476131, guid: 93ef823cb425b1e47a44ead112315c91, type: 3}
-  _instanceCount: 3
+  _instanceCount: 4
   _extent:
-    x: 0.7
-    y: 0.7
+    x: 0.4
+    y: 0.4
   _depth: 40
-  _velocity: 30
+  _velocity: 40
   _repeatPoint: -10
 --- !u!1 &1615425348
 GameObject:

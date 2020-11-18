@@ -1,6 +1,7 @@
-using UnityEngine;
 using Unity.Mathematics;
 using Random = Unity.Mathematics.Random;
+using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace DxrLattice {
 
@@ -41,7 +42,17 @@ sealed class LineController : MonoBehaviour
     {
         var p = i.Random.NextFloat2(-_extent, _extent);
         i.Position = math.float3(p, _depth);
-        i.Speed = i.Random.NextFloat(0.7f, 1);
+        i.Speed = i.Random.NextFloat(0.5f, 1);
+
+        var light = i.Root.GetComponentInChildren<HDAdditionalLightData>();
+        light.color = Color.HSVToRGB(i.Random.NextFloat(), 1, 1);
+
+        var color = light.color;
+        color = new Color(Mathf.GammaToLinearSpace(color.r), Mathf.GammaToLinearSpace(color.g), Mathf.GammaToLinearSpace(color.b));
+        color *= 200;
+
+        var renderer = i.Root.GetComponentInChildren<MeshRenderer>();
+        renderer.material.SetColor("_EmissiveColor", color);
     }
 
     void UpdateInstance(ref Instance i)
