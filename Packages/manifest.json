@@ -9,10 +9,11 @@
     }
   ],
   "dependencies": {
-    "jp.keijiro.klak.motion": "1.0.1",
     "com.unity.burst": "1.4.1",
+    "com.unity.recorder": "2.5.0-pre.1",
     "com.unity.render-pipelines.high-definition": "10.2.0",
     "com.unity.timeline": "1.5.1-pre.2",
+    "jp.keijiro.klak.motion": "1.0.1",
     "com.unity.modules.imageconversion": "1.0.0",
     "com.unity.modules.physics": "1.0.0",
     "com.unity.modules.uielements": "1.0.0",
