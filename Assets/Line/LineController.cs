@@ -15,16 +15,19 @@ sealed class LineController : MonoBehaviour
     [SerializeField] float _depth = 20;
     [SerializeField] float _velocity = 10;
     [SerializeField] float _repeatPoint = -10;
+    [SerializeField] Gradient _spectrum = null;
 
     #endregion
 
-    #region Line segment instance
+    #region Line segment instances
 
-    static uint _seed = 327845;
+    static uint _seed = 32745;
 
     struct Instance
     {
-        public GameObject Root;
+        public GameObject Node;
+        public HDAdditionalLightData Light;
+        public Material Material;
         public Random Random;
         public float3 Position;
         public float Speed;
@@ -32,40 +35,54 @@ sealed class LineController : MonoBehaviour
 
     void InitializeInstance(ref Instance i)
     {
-        i.Root = Object.Instantiate(_prefab, transform);
+        // Prefab instantiation
+        i.Node = Object.Instantiate(_prefab, transform);
+
+        // Component references for fast access
+        i.Light = i.Node.GetComponentInChildren<HDAdditionalLightData>();
+        i.Material = i.Node.GetComponentInChildren<MeshRenderer>().material;
+
+        // Per-instance random number generator
         i.Random = new Random(_seed++);
         i.Random.NextUInt4();
+
+        // Initial reset
         ResetInstance(ref i);
     }
 
     void ResetInstance(ref Instance i)
     {
+        // Position reset
         var p = i.Random.NextFloat2(-_extent, _extent);
         i.Position = math.float3(p, _depth);
+
+        // New random speed multiplier
         i.Speed = i.Random.NextFloat(0.5f, 1);
 
-        var light = i.Root.GetComponentInChildren<HDAdditionalLightData>();
-        light.color = Color.HSVToRGB(i.Random.NextFloat(), 1, 1);
+        // Random color selection from the spectrum
+        var color = _spectrum.Evaluate(i.Random.NextFloat());
 
-        var color = light.color;
-        color = new Color(Mathf.GammaToLinearSpace(color.r), Mathf.GammaToLinearSpace(color.g), Mathf.GammaToLinearSpace(color.b));
-        color *= 200;
+        // Light color
+        i.Light.color = color;
 
-        var renderer = i.Root.GetComponentInChildren<MeshRenderer>();
-        renderer.material.SetColor("_EmissiveColor", color);
+        // Emissive mesh color
+        i.Material.SetColor("_EmissiveColor", color.linear * 200);
     }
 
     void UpdateInstance(ref Instance i)
     {
+        // Simple linear motion
         var z = i.Position.z + i.Speed * -_velocity * Time.deltaTime;
 
         if (z > _repeatPoint)
         {
+            // Position update
             i.Position.z = z;
-            i.Root.transform.position = i.Position;
+            i.Node.transform.position = i.Position;
         }
         else
         {
+            // Reset at the repeat point
             ResetInstance(ref i);
         }
     }
