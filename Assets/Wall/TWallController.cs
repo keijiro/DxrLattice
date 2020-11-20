@@ -10,7 +10,6 @@ sealed class TWallController : MonoBehaviour
 
     [SerializeField] GameObject _prefab = null;
     [SerializeField] uint3 _repeats = math.uint3(7, 5, 20);
-    [SerializeField] float _thrust = 1;
 
     #endregion
 
@@ -44,17 +43,6 @@ sealed class TWallController : MonoBehaviour
         }
     }
 
-    void MoveWalls(float delta)
-    {
-        foreach (var xform in _xforms)
-        {
-            var p = xform.localPosition;
-            p.z -= delta;
-            if (p.z < 0) p.z += _repeats.z;
-            xform.localPosition = p;
-        }
-    }
-
     #endregion
 
     #region MonoBehaviour
@@ -65,9 +53,6 @@ sealed class TWallController : MonoBehaviour
             for (var col = 0; col < _repeats.x; col++)
                 BuildTube(transform, GetTubeOrigin(col, row), col % 3);
     }
-
-    void Update()
-      => MoveWalls(_thrust * Time.deltaTime);
 
     #endregion
 }
