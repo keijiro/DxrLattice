@@ -1,0 +1,75 @@
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.Mathematics;
+
+namespace DxrLattice {
+
+sealed class TWallController : MonoBehaviour
+{
+    #region Editable attributes
+
+    [SerializeField] GameObject _prefab = null;
+    [SerializeField] uint3 _repeats = math.uint3(7, 5, 20);
+    [SerializeField] float _thrust = 1;
+
+    #endregion
+
+    #region Wall instances
+
+    List<Transform> _xforms = new List<Transform>();
+
+    float3 GetTubeOrigin(int column, int row)
+    {
+        var p = math.float2(column, row) - _repeats.xy / 2;
+        p.x += (row & 1) * 0.5f;
+        return math.float3(p, 0);
+    }
+
+    void BuildTube(Transform parent, float3 origin, int start)
+    {
+        var pos = (float3)parent.position + origin;
+        var offs = math.float3(0, -0.29f, 0);
+
+        for (var i = 0; i < _repeats.z;)
+        {
+            var phi = (i + start) * math.PI * 2 / 3;
+            var rot = quaternion.AxisAngle(math.float3(0, 0, 1), phi);
+            var opos = pos + math.mul(rot, offs);
+
+            var go = Instantiate(_prefab, opos, rot, parent);
+            _xforms.Add(go.transform);
+
+            pos.z += 1;
+            i++;
+        }
+    }
+
+    void MoveWalls(float delta)
+    {
+        foreach (var xform in _xforms)
+        {
+            var p = xform.localPosition;
+            p.z -= delta;
+            if (p.z < 0) p.z += _repeats.z;
+            xform.localPosition = p;
+        }
+    }
+
+    #endregion
+
+    #region MonoBehaviour
+
+    void Start()
+    {
+        for (var row = 0; row < _repeats.y; row++)
+            for (var col = 0; col < _repeats.x; col++)
+                BuildTube(transform, GetTubeOrigin(col, row), col % 3);
+    }
+
+    void Update()
+      => MoveWalls(_thrust * Time.deltaTime);
+
+    #endregion
+}
+
+} // namespace MirrorWorld
