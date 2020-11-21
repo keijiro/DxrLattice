@@ -109,4 +109,4 @@ sealed class LineController : MonoBehaviour
     #endregion
 }
 
-} // namespace MirrorWorld
+} // namespace DxrLattice

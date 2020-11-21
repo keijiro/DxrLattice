@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 
 namespace DxrLattice {
 
-sealed class WallController : MonoBehaviour
+sealed class SquareLatticeBuilder : MonoBehaviour
 {
     #region Editable attributes
 
@@ -13,12 +12,13 @@ sealed class WallController : MonoBehaviour
 
     #endregion
 
-    #region Wall instances
-
-    List<Transform> _xforms = new List<Transform>();
+    #region Builder functions
 
     float3 GetTubeOrigin(int column, int row)
-      => math.float3(column - _repeats.x / 2, row - _repeats.y / 2, row & 1);
+    {
+        var p = math.float2(column, row) - _repeats.xy / 2;
+        return math.float3(p, row & 1);
+    }
 
     void BuildTube(Transform parent, float3 origin)
     {
@@ -34,22 +34,15 @@ sealed class WallController : MonoBehaviour
 
         for (var i = 0; i < _repeats.z;)
         {
-            var go1 = Instantiate(_prefab, pos - p_h, q_h, parent);
-            var go2 = Instantiate(_prefab, pos + p_h, q_h, parent);
-
+            Instantiate(_prefab, pos - p_h, q_h, parent);
+            Instantiate(_prefab, pos + p_h, q_h, parent);
             pos.z += 1;
             i++;
 
-            var go3 = Instantiate(_prefab, pos - p_v, q_v, parent);
-            var go4 = Instantiate(_prefab, pos + p_v, q_v, parent);
-
+            Instantiate(_prefab, pos - p_v, q_v, parent);
+            Instantiate(_prefab, pos + p_v, q_v, parent);
             pos.z += 1;
             i++;
-
-            _xforms.Add(go1.transform);
-            _xforms.Add(go2.transform);
-            _xforms.Add(go3.transform);
-            _xforms.Add(go4.transform);
         }
     }
 
@@ -67,4 +60,4 @@ sealed class WallController : MonoBehaviour
     #endregion
 }
 
-} // namespace MirrorWorld
+} // namespace DxrLattice

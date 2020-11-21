@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 
 namespace DxrLattice {
 
-sealed class TWallController : MonoBehaviour
+sealed class TriangularLatticeBuilder : MonoBehaviour
 {
     #region Editable attributes
 
@@ -13,9 +12,7 @@ sealed class TWallController : MonoBehaviour
 
     #endregion
 
-    #region Wall instances
-
-    List<Transform> _xforms = new List<Transform>();
+    #region Builder functions
 
     float3 GetTubeOrigin(int column, int row)
     {
@@ -34,10 +31,7 @@ sealed class TWallController : MonoBehaviour
             var phi = (i + start) * math.PI * 2 / 3;
             var rot = quaternion.AxisAngle(math.float3(0, 0, 1), phi);
             var opos = pos + math.mul(rot, offs);
-
-            var go = Instantiate(_prefab, opos, rot, parent);
-            _xforms.Add(go.transform);
-
+            Instantiate(_prefab, opos, rot, parent);
             pos.z += 1;
             i++;
         }
@@ -57,4 +51,4 @@ sealed class TWallController : MonoBehaviour
     #endregion
 }
 
-} // namespace MirrorWorld
+} // namespace DxrLattice
