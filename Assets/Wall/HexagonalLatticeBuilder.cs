@@ -9,8 +9,10 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
     #region Editable attributes
 
     [SerializeField] GameObject _prefab = null;
+    [SerializeField] Material _emissiveMaterial = null;
     [SerializeField] uint3 _repeats = math.uint3(7, 5, 20);
-    [SerializeField] float _ratio = 0.5f;
+    [SerializeField] float _removalRate = 0.4f;
+    [SerializeField] float _emissionRate = 0.1f;
     [SerializeField] uint _seed = 1234;
 
     #endregion
@@ -36,11 +38,18 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
         {
             for (var j = 0; j < 3; j++)
             {
-                if (_random.NextFloat() > _ratio) continue;
+                if (_random.NextFloat() < _removalRate) continue;
+
                 var phi = ((i + j + start) % 3 - 1) * math.PI / 3;
                 var rot = quaternion.AxisAngle(math.float3(0, 0, 1), phi);
                 var opos = pos + math.mul(rot, offs);
-                Instantiate(_prefab, opos, rot, parent);
+                var go = Instantiate(_prefab, opos, rot, parent);
+
+                if (_random.NextFloat() < _emissionRate)
+                {
+                    var rend = go.GetComponentInChildren<Renderer>();
+                    rend.material = _emissiveMaterial;
+                }
             }
             pos.z += 1;
             i++;
