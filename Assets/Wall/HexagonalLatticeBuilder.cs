@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace DxrLattice {
 
-sealed class TriangularLatticeBuilder : MonoBehaviour
+sealed class HexagonalLatticeBuilder : MonoBehaviour
 {
     #region Editable attributes
 
@@ -18,18 +18,18 @@ sealed class TriangularLatticeBuilder : MonoBehaviour
     {
         var p = math.float2(column, row) - _repeats.xy / 2;
         p.x += (row & 1) * 0.5f;
-        p.y *= 0.87f;
+        p *= math.float2(3, 0.87f);
         return math.float3(p, 0);
     }
 
     void BuildTube(Transform parent, float3 origin, int start)
     {
         var pos = (float3)parent.position + origin;
-        var offs = math.float3(0, 0.29f, 0);
+        var offs = math.float3(0, 0.87f, 0);
 
         for (var i = 0; i < _repeats.z;)
         {
-            var phi = (i + start) * math.PI * 2 / 3;
+            var phi = ((i + start) % 3 - 1) * math.PI / 3;
             var rot = quaternion.AxisAngle(math.float3(0, 0, 1), phi);
             var opos = pos + math.mul(rot, offs);
             Instantiate(_prefab, opos, rot, parent);
