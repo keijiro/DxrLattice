@@ -9,15 +9,16 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
     #region Editable attributes
 
     [SerializeField] GameObject _prefab = null;
-    [SerializeField] Material _emissiveMaterial = null;
     [SerializeField] uint3 _repeats = math.uint3(7, 5, 20);
     [SerializeField] float _removalRate = 0.4f;
-    [SerializeField] float _emissionRate = 0.1f;
     [SerializeField] uint _seed = 1234;
 
     #endregion
 
     #region Builder functions
+
+    static readonly int Seed1Key = Shader.PropertyToID("_Seed1");
+    static readonly int Seed2Key = Shader.PropertyToID("_Seed2");
 
     Random _random;
 
@@ -29,10 +30,15 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
         return math.float3(p, 0);
     }
 
-    void BuildTube(Transform parent, float3 origin, int start)
+    void BuildTube(Transform parent, float3 origin)
     {
+        var seed1 = _random.NextFloat();
+        var seed2 = _random.NextFloat();
+
         var pos = (float3)parent.position + origin;
         var offs = math.float3(0, 0.87f, 0);
+
+        var prop = new MaterialPropertyBlock();
 
         for (var i = 0; i < _repeats.z;)
         {
@@ -40,16 +46,15 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
             {
                 if (_random.NextFloat() < _removalRate) continue;
 
-                var phi = ((i + j + start) % 3 - 1) * math.PI / 3;
+                var phi = ((i + j) % 3 - 1) * math.PI / 3;
                 var rot = quaternion.AxisAngle(math.float3(0, 0, 1), phi);
                 var opos = pos + math.mul(rot, offs);
-                var go = Instantiate(_prefab, opos, rot, parent);
 
-                if (_random.NextFloat() < _emissionRate)
-                {
-                    var rend = go.GetComponentInChildren<Renderer>();
-                    rend.material = _emissiveMaterial;
-                }
+                prop.SetFloat(Seed1Key, seed1 + phi);
+                prop.SetFloat(Seed2Key, seed2 + phi);
+
+                var go = Instantiate(_prefab, opos, rot, parent);
+                go.GetComponentInChildren<Renderer>().SetPropertyBlock(prop);
             }
             pos.z += 1;
             i++;
@@ -69,7 +74,7 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
         // Tube array
         for (var row = 0; row < _repeats.y; row++)
             for (var col = 0; col < _repeats.x; col++)
-                BuildTube(transform, GetTubeOrigin(col, row), col % 3);
+                BuildTube(transform, GetTubeOrigin(col, row));
     }
 
     #endregion

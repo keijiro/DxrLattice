@@ -216,7 +216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874187026}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 543ddbe12367a4899b011d43ef41f357, type: 3}
   m_Name: 
@@ -228,8 +228,8 @@ MonoBehaviour:
   rotationAmount:
     x: 0
     y: 0
-    z: 360
-  frequency: 0.1
+    z: 30
+  frequency: 0.2
   octaves: 2
 --- !u!1 &1039522212
 GameObject:
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 4886587909146476131, guid: 93ef823cb425b1e47a44ead112315c91, type: 3}
-  _instanceCount: 4
+  _instanceCount: 3
   _extent:
     x: 0.8
     y: 0.8
@@ -284,16 +284,16 @@ MonoBehaviour:
   _repeatPoint: -10
   _spectrum:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 0, g: 1, b: 0.7770927, a: 1}
+    key0: {r: 1, g: 0.9880785, b: 0, a: 1}
+    key1: {r: 1, g: 0.39636728, b: 0, a: 1}
     key2: {r: 1, g: 0.73876613, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 14456
-    ctime1: 45875
+    ctime0: 32575
+    ctime1: 65535
     ctime2: 65535
     ctime3: 0
     ctime4: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 1
-    m_NumColorKeys: 3
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!1 &1078068421
 GameObject:
@@ -422,14 +422,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d646b3db715b91f4aae2a96993d31fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2887117785970514581, guid: b549536764fa97144a6a331a7dfdad1a, type: 3}
-  _emissiveMaterial: {fileID: 2100000, guid: e48f2ec42e405404594b56dc3d7716ea, type: 2}
+  _prefab: {fileID: 2887117785970514581, guid: 5da13f47ae2c88647a0232c5ce9612c7, type: 3}
   _repeats:
     x: 5
     y: 8
     z: 22
   _removalRate: 0.4
-  _emissionRate: 0.08
   _seed: 1234
 --- !u!4 &1615425350
 Transform:

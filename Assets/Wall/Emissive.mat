@@ -209,6 +209,8 @@ Material:
     - _RefractionModel: 3
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
+    - _Seed1: 0.04
+    - _Seed2: 0.2
     - _Smoothness: 0.95
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -245,6 +247,7 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
+    - _Width: 0.1
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 4
@@ -263,8 +266,8 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Tint: {r: 955.4255, g: 354.49567, b: 0, a: 1}
-    - _Tint2: {r: 0, g: 106.75586, b: 512, a: 1}
+    - _Tint: {r: 120.5094, g: 0, b: 411.02313, a: 1}
+    - _Tint2: {r: 0, g: 307.2, b: 383.49805, a: 1}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
