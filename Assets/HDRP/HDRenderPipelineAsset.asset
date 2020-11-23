@@ -153,7 +153,7 @@ MonoBehaviour:
   m_DefaultVolumeProfile: {fileID: 11400000, guid: 798eeffe60224ec4d8db4fdc04cffd1f, type: 2}
   m_LensAttenuation: 0
   m_UseRenderGraph: 1
-  m_DefaultLookDevProfile: {fileID: 0}
+  m_DefaultLookDevProfile: {fileID: 11400000, guid: 254c4fe87beb7be4fa72e1681edbed02, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
       data1: 72198262773251917
@@ -444,8 +444,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79d85fe17316b34409dc7eda613d5859, type: 2}
   beforeTransparentCustomPostProcesses: []
   beforeTAACustomPostProcesses: []
-  beforePostProcessCustomPostProcesses: []
-  afterPostProcessCustomPostProcesses: []
+  beforePostProcessCustomPostProcesses:
+  - Kino.PostProcessing.Streak, Kino.Postprocessing, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  afterPostProcessCustomPostProcesses:
+  - Kino.PostProcessing.Overlay, Kino.Postprocessing, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
   virtualTexturingSettings:
     streamingCpuCacheSizeInMegaBytes: 256
     streamingGpuCacheSettings:
