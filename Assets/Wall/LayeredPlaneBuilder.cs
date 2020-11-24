@@ -44,8 +44,7 @@ sealed class LayeredPlaneBuilder : MonoBehaviour
                     p.xy = p.xy - _extent.xy / 2 + 0.5f;
 
                     // Instantiation and material overriding
-                    var go = Instantiate(_prefab, p, rot, parent);
-                    mat.FindRendererAndApply(go);
+                    mat.Apply(Instantiate(_prefab, p, rot, parent));
                 }
             }
         }

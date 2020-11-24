@@ -23,8 +23,8 @@ class MaterialOverride
     public void Apply(Renderer renderer)
       => renderer.SetPropertyBlock(_props);
 
-    public void FindRendererAndApply(GameObject go)
-      => go.GetComponentInChildren<Renderer>().SetPropertyBlock(_props);
+    public void Apply(GameObject go)
+      => go.GetComponent<Renderer>().SetPropertyBlock(_props);
 }
 
 } // namespace DxrLattice
