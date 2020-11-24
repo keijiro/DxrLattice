@@ -285,15 +285,15 @@ MonoBehaviour:
   _spectrum:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 0, g: 0.569813, b: 1, a: 1}
-    key2: {r: 1, g: 0.357633, b: 0, a: 0}
+    key1: {r: 0, g: 1, b: 0.7770927, a: 1}
+    key2: {r: 1, g: 0.73876613, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 14456
-    ctime1: 38550
+    ctime1: 45875
     ctime2: 65535
     ctime3: 0
     ctime4: 0
