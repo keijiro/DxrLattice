@@ -1,6 +1,6 @@
 using UnityEngine;
 using Unity.Mathematics;
-using Random = Unity.Mathematics.Random;
+using Klak.Math;
 
 namespace DxrLattice {
 
@@ -9,72 +9,59 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
     #region Editable attributes
 
     [SerializeField] GameObject _prefab = null;
-    [SerializeField] uint3 _repeats = math.uint3(7, 5, 20);
+    [SerializeField] uint3 _extent = math.uint3(7, 5, 20);
     [SerializeField] float _removalRate = 0.4f;
-    [SerializeField] uint _seed = 1234;
+    [SerializeField] uint _randomSeed = 1;
 
     #endregion
 
-    #region Builder functions
-
-    static readonly int Seed1Key = Shader.PropertyToID("_Seed1");
-    static readonly int Seed2Key = Shader.PropertyToID("_Seed2");
-
-    Random _random;
-
-    float3 GetTubeOrigin(int column, int row)
-    {
-        var p = math.float2(column, row) - _repeats.xy / 2;
-        p.x += (row & 1) * 0.5f;
-        p *= math.float2(3, 0.87f);
-        return math.float3(p, 0);
-    }
-
-    void BuildTube(Transform parent, float3 origin)
-    {
-        var seed1 = _random.NextFloat();
-        var seed2 = _random.NextFloat();
-
-        var pos = (float3)parent.position + origin;
-        var offs = math.float3(0, 0.87f, 0);
-
-        var prop = new MaterialPropertyBlock();
-
-        for (var i = 0; i < _repeats.z;)
-        {
-            for (var j = 0; j < 3; j++)
-            {
-                if (_random.NextFloat() < _removalRate) continue;
-
-                var phi = ((i + j) % 3 - 1) * math.PI / 3;
-                var rot = quaternion.AxisAngle(math.float3(0, 0, 1), phi);
-                var opos = pos + math.mul(rot, offs);
-
-                prop.SetFloat(Seed1Key, seed1 + phi);
-                prop.SetFloat(Seed2Key, seed2 + phi);
-
-                var go = Instantiate(_prefab, opos, rot, parent);
-                go.GetComponentInChildren<Renderer>().SetPropertyBlock(prop);
-            }
-            pos.z += 1;
-            i++;
-        }
-    }
-
-    #endregion
-
-    #region MonoBehaviour
+    #region MonoBehaviour implementation
 
     void Start()
     {
-        // PRNG initialization
-        _random = new Random(_seed);
-        _random.NextUInt4();
+        var hash = new XXHash(_randomSeed);
+        var mat = new MaterialOverride(_randomSeed);
 
-        // Tube array
-        for (var row = 0; row < _repeats.y; row++)
-            for (var col = 0; col < _repeats.x; col++)
-                BuildTube(transform, GetTubeOrigin(col, row));
+        var parent = transform;
+
+        // Column - Row - Edge x3 - Depth
+        for (var col = 0u; col < _extent.x; col++)
+        {
+            for (var row = 0u; row < _extent.y; row++)
+            {
+                // Tube origin
+                var org = math.float2(col, row) - _extent.xy / 2;
+                org.x += (row & 1) * 0.5f;
+                org *= math.float2(3, 0.87f);
+
+                for (var i = 0u; i < 3u; i++)
+                {
+                    // Per-strip random seed
+                    var seed = hash.UInt(col) + hash.UInt(row) + i;
+
+                    // Per-strip random material properties
+                    mat.SetParameters(seed + 500);
+
+                    // Rotation
+                    var phi = (i - 1.0f) * math.PI / 3;
+                    var rot = quaternion.RotateZ(phi);
+
+                    // Position
+                    var pos = math.mul(rot, math.float3(0, 0.87f, 0));
+                    pos.xy += org;
+
+                    for (var depth = 0u; depth < _extent.z; depth++)
+                    {
+                        // Random removal
+                        if (hash.Float(seed + depth) < _removalRate) continue;
+
+                        // Instantiation and material overriding
+                        pos.z = depth;
+                        mat.Apply(Instantiate(_prefab, pos, rot, parent));
+                    }
+                }
+            }
+        }
     }
 
     #endregion
