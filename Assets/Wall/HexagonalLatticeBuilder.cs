@@ -9,7 +9,7 @@ sealed class HexagonalLatticeBuilder : MonoBehaviour
     #region Editable attributes
 
     [SerializeField] GameObject _prefab = null;
-    [SerializeField] uint3 _extent = math.uint3(7, 5, 20);
+    [SerializeField] uint3 _extent = math.uint3(5, 6, 20);
     [SerializeField] float _removalRate = 0.4f;
     [SerializeField] uint _randomSeed = 1;
 
