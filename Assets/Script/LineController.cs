@@ -21,7 +21,7 @@ sealed class LineController : MonoBehaviour
 
     #region Line segment instances
 
-    static uint _seed = 32745;
+    static uint _seed = 327453;
 
     struct Instance
     {
@@ -66,7 +66,7 @@ sealed class LineController : MonoBehaviour
         i.Light.color = color;
 
         // Emissive mesh color
-        i.Material.SetColor("_EmissiveColor", color.linear * 200);
+        i.Material.SetColor("_EmissiveColor", color.linear * 1000);
     }
 
     void UpdateInstance(ref Instance i)

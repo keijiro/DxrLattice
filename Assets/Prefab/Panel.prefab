@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2869450982477224106}
   - component: {fileID: 3019517743119721319}
   m_Layer: 0
-  m_Name: EmissiveWall
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

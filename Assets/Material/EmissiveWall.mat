@@ -248,7 +248,7 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _Width: 0.1
+    - _Width: 0.06
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 3
     - _ZTestModeDistortion: 4
@@ -267,8 +267,8 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Tint: {r: 29.508846, g: 0, b: 1.081476, a: 1}
-    - _Tint2: {r: 0, g: 127.59884, b: 445.72195, a: 1}
+    - _Tint: {r: 29.508846, g: 5.2549844, b: 0, a: 1}
+    - _Tint2: {r: 0, g: 351.47928, b: 445.7219, a: 1}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}

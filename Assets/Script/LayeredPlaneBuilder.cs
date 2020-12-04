@@ -41,7 +41,7 @@ sealed class LayeredPlaneBuilder : MonoBehaviour
 
                     // Instance position
                     var p = math.float3(col, row, depth);
-                    p.xy = p.xy - _extent.xy / 2 + 0.5f;
+                    p.xy = p.xy - _extent.xy / 2 + math.float2(0, 0.5f);
 
                     // Instantiation and material overriding
                     mat.Apply(Instantiate(_prefab, p, rot, parent));
