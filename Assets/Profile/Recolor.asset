@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f019255bcd1cb489b193b5e8443a27, type: 3}
   m_Name: Streak
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 0
@@ -122,10 +122,10 @@ MonoBehaviour:
     max: 1
   ditherType:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 0
   ditherStrength:
     m_OverrideState: 1
-    m_Value: 0.897
+    m_Value: 0.5
     min: 0
     max: 1
 --- !u!114 &4183563761834597487
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f077503be6ae942a1e1245dbd53ea9, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
