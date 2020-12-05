@@ -168,15 +168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionAmount:
-    x: 0.4
-    y: 0.4
+    x: 0.3
+    y: 0.3
     z: 0
   rotationAmount:
-    x: 10
-    y: 10
-    z: 10
-  frequency: 0.2
-  octaves: 2
+    x: 40
+    y: 40
+    z: 40
+  frequency: 0.25
+  octaves: 3
 --- !u!1 &156330161
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 156330162}
   - component: {fileID: 156330163}
   m_Layer: 0
-  m_Name: Light
+  m_Name: Recolor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 4c23771e50dd1314ea36dbb7d0f84ed6, type: 2}
+  sharedProfile: {fileID: 11400000, guid: eef10e08432108c4f8f807bfad16d0b3, type: 2}
 --- !u!1 &1015669486
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,10 +429,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2887117785970514581, guid: 5da13f47ae2c88647a0232c5ce9612c7, type: 3}
   _extent:
-    x: 5
-    y: 5
+    x: 7
+    y: 7
     z: 24
-  _removalRate: 0.4
+  _removalRate: 0.5
   _randomSeed: 1
 --- !u!4 &1615425350
 Transform:
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72376309e193294e8a1eb7309a1ee85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 14
+  _speed: 5
   _depth: 24
 --- !u!1 &1974615461
 GameObject:
