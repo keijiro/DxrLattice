@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EmissiveWall
+  m_Name: EmissiveWall1
   m_Shader: {fileID: -6465566751694194690, guid: 11297de5ee431de4e904afd4e780fc97, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
