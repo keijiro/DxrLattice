@@ -9,17 +9,14 @@
     }
   ],
   "dependencies": {
-    "com.unity.burst": "1.4.3",
-    "com.unity.recorder": "2.5.0-pre.1",
-    "com.unity.render-pipelines.high-definition": "10.2.2",
-    "com.unity.timeline": "1.5.1-pre.2",
+    "com.unity.burst": "1.5.0-pre.4",
+    "com.unity.recorder": "2.5.4",
+    "com.unity.render-pipelines.high-definition": "11.0.0",
+    "com.unity.timeline": "1.5.2",
     "jp.keijiro.kino.post-processing": "2.1.15",
     "jp.keijiro.klak.math": "1.0.1",
     "jp.keijiro.klak.motion": "1.0.1",
     "jp.keijiro.noiseshader": "1.0.0",
-    "com.unity.modules.imageconversion": "1.0.0",
-    "com.unity.modules.physics": "1.0.0",
-    "com.unity.modules.uielements": "1.0.0",
-    "com.unity.modules.video": "1.0.0"
+    "com.unity.modules.jsonserialize": "1.0.0"
   }
 }
