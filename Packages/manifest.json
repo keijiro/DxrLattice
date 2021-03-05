@@ -9,13 +9,13 @@
     }
   ],
   "dependencies": {
-    "com.unity.burst": "1.5.0-pre.4",
+    "com.unity.burst": "1.5.0-pre.5",
     "com.unity.recorder": "2.5.4",
     "com.unity.render-pipelines.high-definition": "11.0.0",
     "com.unity.timeline": "1.5.2",
     "jp.keijiro.kino.post-processing": "2.1.15",
-    "jp.keijiro.klak.math": "1.0.1",
-    "jp.keijiro.klak.motion": "1.0.1",
+    "jp.keijiro.klak.math": "1.0.3",
+    "jp.keijiro.klak.motion": "1.0.2",
     "jp.keijiro.noiseshader": "1.0.0",
     "com.unity.modules.jsonserialize": "1.0.0"
   }
