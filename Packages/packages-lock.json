@@ -17,7 +17,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.recorder": {
-      "version": "2.5.4",
+      "version": "2.6.0-exp.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -98,7 +98,8 @@
       "depth": 1,
       "source": "builtin",
       "dependencies": {
-        "com.unity.shadergraph": "11.0.0"
+        "com.unity.shadergraph": "11.0.0",
+        "com.unity.render-pipelines.core": "11.0.0"
       }
     },
     "jp.keijiro.kino.post-processing": {
